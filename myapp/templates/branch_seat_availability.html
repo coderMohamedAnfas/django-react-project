@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ branch }} Seat Availability</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">{{ branch }}</h2>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                {% for college in colleges %}
+                    <thead>
+                        <tr>
+                            <th class="bg-secondary text-white" colspan="3">{{ college.college }}</th>
+                        </tr>
+                        <tr>
+                            <th>Category</th>
+                            <th>Seats</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category in college.categories %}
+                            <tr>
+                                <td>{{ category.name }}</td>
+                                <td>{{ category.availability }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="mt-3 text-center">
+            <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

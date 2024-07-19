@@ -1,0 +1,115 @@
+/* seat-availability.css */
+
+.seat-availability-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  width: 100%; /* Full width */
+}
+
+.college-section {
+  text-align: center;
+  margin-top: 0;
+  width: 100%; /* Full width */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.college-name {
+  margin-top: 0;
+  color: red;
+  font-size: 2.8em;
+  word-wrap: break-word; /* Ensure long names wrap */
+  margin-bottom: 0;
+  background-color: #fffffd;
+}
+
+.branch-section {
+  margin-top: 10px;
+  width: 100%; /* Full width */
+}
+
+.branch-details h3,
+.branch-section h3 {
+  font-size: 2.6em; /* Increase font size for branch name */
+  margin: 10px 0;
+  color: #007bff; /* Blue color for branch name */
+}
+
+.category-tables {
+  display: flex;
+  flex-wrap: wrap; /* Ensure tables wrap to new lines when necessary */
+  justify-content: center; /* Adjust alignment of category tables */
+  gap: 20px; /* Add space between tables */
+}
+
+.category-table {
+  margin: 10px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  min-width: 300px; /* Ensure tables have a minimum width */
+  flex: 1; /* Ensure tables take equal space */
+}
+
+.category-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.category-table th,
+.category-table td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.2em; /* Increase font size for readability */
+}
+
+.category-table th {
+  background-color: #007bff; /* Blue color for header */
+  color: white;
+}
+
+.category-table .category-name {
+  font-weight: bold;
+}
+
+.category-table .availability {
+  font-weight: bold;
+}
+
+.category-table .red {
+  color: red;
+}
+
+.category-table .orange {
+  color: orange;
+}
+
+.category-table .yellow {
+  color: rgb(248, 206, 17);
+}
+
+.category-table .green {
+  color: green;
+}
+
+.no-seats-available {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 2em;
+  color: #777;
+}
+
+.disclaimer {
+  margin-top: 30px;
+  font-size: 1.2em;
+  color: #ffffff;
+  text-align: center;
+  background-color: #a2c5f3;
+  padding: 10px;
+  border-radius: 5px;
+}

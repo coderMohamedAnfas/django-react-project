@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Colleges</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            display: block;
+            stroke-width: 2;
+            stroke: #4CAF50;
+            stroke-miterlimit: 10;
+            margin: 10% auto;
+            box-shadow: inset 0px 0px 0px #4CAF50;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+        }
+
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #4CAF50;
+            fill: #fff;
+            animation: stroke .6s cubic-bezier(.65,.05,.36,1) forwards;
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke .3s cubic-bezier(.65,.05,.36,1) .6s forwards;
+        }
+
+        @keyframes stroke {
+            100% { stroke-dashoffset: 0; }
+        }
+
+        @keyframes scale {
+            0%, 100% { transform: none; }
+            50% { transform: scale3d(1.1, 1.1, 1); }
+        }
+
+        @keyframes fill {
+            100% { box-shadow: inset 0px 0px 0px 30px #4CAF50; }
+        }
+
+        .btn-saving {
+            pointer-events: none;
+            position: relative;
+        }
+
+        .btn-saving::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            border: 2px solid #fff;
+            border-top: 2px solid #007bff;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Select Colleges to Display</h1>
+        
+        <!-- Display messages -->
+        <!-- {% if request.GET.success %} -->
+            <div id="success-message" class="text-center">
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark__check" fill="none" d="M14 27l10 10L38 17"/>
+                </svg>
+            </div>
+        <!-- {% endif %} -->
+        
+        <form method="post">
+            {% csrf_token %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Select</th>
+                        <th scope="col">College Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for college in colleges %}
+                        <tr>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="colleges" value="{{ college.college }}" id="college-{{ forloop.counter }}" {% if college.display %}checked{% endif %}>
+                                </div>
+                            </td>
+                            <td>
+                                <label class="form-check-label" for="college-{{ forloop.counter }}">
+                                    {{ college.college }}
+                                </label>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <button id="submit-button" type="submit" class="btn btn-primary mt-3">Save</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            const submitButton = document.getElementById('submit-button');
+            const successMessage = document.getElementById('success-message');
+            
+            if (successMessage) {
+                // Show the success message for 7 seconds and then hide it
+                setTimeout(function() {
+                    successMessage.classList.add('d-none');
+                }, 2000);
+            }
+
+            form.addEventListener('submit', function(event) {
+                // Add saving animation to the button
+                submitButton.classList.add('btn-saving');
+            });
+        });
+    </script>
+</body>
+</html>
